@@ -35,6 +35,6 @@ public class Main {
             for (Map.Entry<String, String> map : parsedList.entrySet()) {
                 System.out.println(map.getKey() + " - " + map.getValue());
             }
-        } else throw new MyException("Something gone wrong! Check sizes of parsed elements");
+        } else throw new MyException("Something has gone wrong! Check sizes of parsed elements");
     }
 }
