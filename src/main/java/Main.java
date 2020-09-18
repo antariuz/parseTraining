@@ -1,6 +1,10 @@
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -36,5 +40,19 @@ public class Main {
                 System.out.println(map.getKey() + " - " + map.getValue());
             }
         } else throw new MyException("Something has gone wrong! Check sizes of parsed elements");
+
+        // Writing text file of HashMap
+        File file = new File("parsedList.txt");
+        BufferedWriter bufferedWriter = null;
+        try {
+            bufferedWriter = new BufferedWriter(new FileWriter(file));
+            for (Map.Entry<String, String> pair : parsedList.entrySet()) {
+                bufferedWriter.write(pair.getKey() + " - " + pair.getValue());
+                bufferedWriter.newLine();
+            }
+            bufferedWriter.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
