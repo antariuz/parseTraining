@@ -34,25 +34,23 @@ public class Main {
             for (int i = 0; i < listTopicDate.size(); i++) {
                 parsedList.put(listTopicName.get(i).text(), listTopicDate.get(i).text());
             }
-
-            //Just showing what we have
-            for (Map.Entry<String, String> map : parsedList.entrySet()) {
-                System.out.println(map.getKey() + " - " + map.getValue());
-            }
         } else throw new MyException("Something has gone wrong! Check sizes of parsed elements");
 
         // Writing text file of HashMap
-        File file = new File("parsedList.txt");
-        BufferedWriter bufferedWriter = null;
-        try {
-            bufferedWriter = new BufferedWriter(new FileWriter(file));
-            for (Map.Entry<String, String> pair : parsedList.entrySet()) {
-                bufferedWriter.write(pair.getKey() + " - " + pair.getValue());
-                bufferedWriter.newLine();
+        if (!parsedList.isEmpty()) {
+            File file = new File("parsedList.txt");
+            try {
+                BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(file));
+                for (Map.Entry<String, String> map : parsedList.entrySet()) {
+                    bufferedWriter.write(map.getKey() + " - " + map.getValue());
+                    bufferedWriter.newLine();
+                    System.out.println(map.getKey() + " - " + map.getValue());
+                }
+                System.out.println("HashMap has been written into \"parsedList.txt\"");
+                bufferedWriter.flush();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-            bufferedWriter.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 }
